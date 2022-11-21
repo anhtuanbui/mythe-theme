@@ -3495,9 +3495,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-// require('dotenv').config();
-
 const href = window.location.href.split('/');
 const API_URL = href[0] + '//' + href[2] + '/wp-json/wp/v2/';
 class Home extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
@@ -3507,15 +3504,13 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
       title: '',
       content: ''
     };
-    console.log(API_URL);
   }
   async componentDidMount() {
-    const data = await this.getData('posts/429');
-    console.log(data);
+    const data = await this.getPost(429);
     this.setState(data);
   }
-  async getData(value) {
-    const response = await fetch(API_URL + value);
+  async getPost(value) {
+    const response = await fetch(API_URL + 'posts/' + value);
     const data = await response.json();
     return data;
   }

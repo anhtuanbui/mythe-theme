@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { useLocation } from 'react-router-dom';
 import './home.scss';
 
-// require('dotenv').config();
-
 const href = window.location.href.split('/');
 
 const API_URL = href[0] + '//' + href[2] +'/wp-json/wp/v2/';
@@ -17,18 +15,15 @@ export default class Home extends Component {
             title: '',
             content: ''
         };
-
-        console.log(API_URL);
     }
     
     async componentDidMount() {
-        const data = await this.getData('posts/429');
-        console.log(data);
+        const data = await this.getPost(429);
         this.setState(data);
     }
 
-    async getData(value) { 
-        const response = await fetch(API_URL + value);
+    async getPost(value) { 
+        const response = await fetch(API_URL + 'posts/' + value);
         const data = await response.json();
         return data;
     }
